@@ -23,5 +23,18 @@ namespace SharpMvvmExtension
                 }
             }
         }
+
+        public static T GetPopertyValue<T>(this object dataContext, string popertyName, object parameter = null)
+        {
+            T propertyValue = default(T);
+            if (dataContext != null)
+            {
+                object propertyValueObject = dataContext.GetType().GetProperty(popertyName).GetValue(dataContext);
+                if (propertyValueObject != null && propertyValueObject is T)
+                    return propertyValue = (T)propertyValueObject;
+            }
+
+            return propertyValue;
+        }
     }
 }
